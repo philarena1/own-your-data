@@ -43,6 +43,3 @@ def tweets_to_df(file):
     return tweets_df
 
 
-file = tweets_to_df('tweets2/tweet.js')
-
-
