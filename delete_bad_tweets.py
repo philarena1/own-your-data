@@ -1,32 +1,8 @@
 
-import os
-import json
-import re
-import pandas as pd
 import time
+from read_tweets import tweets_to_df
 
-
-# get df of all tweets ever
-
-ls = []
-i = 0
-path = 'tweets2/tweet.js'
-tweet_lists = []
-
-with open(path) as data_file:
-    data_str = data_file.read()
-
-    first_data_line = re.match(r'window.YTD.tweet.part0 =', data_str).group(0)
-    data_str = re.sub(first_data_line, '', data_str)
-    data = json.loads(data_str)
-
-    i = 0
-    while i < len(data):
-        format_tweets = [data[i]['id_str'], data[i]['full_text'],str(data[i]['id']), str(data[i]['created_at'])]
-        tweet_lists.append(format_tweets)
-        i = i + 1
-
-tweets_df = pd.DataFrame( tweet_lists, columns=['id_str','text','id','created_at'])
+tweets_df = tweets_to_df('tweets2/tweet.js')
 
 
 #get index of bad tweets
