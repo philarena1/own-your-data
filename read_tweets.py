@@ -37,7 +37,7 @@ def tweets_to_df(file):
             i = i + 1
 
     tweets_df = pd.DataFrame(tweet_lists, columns=['id_str', 'text', 'id', 'created_at', 'favorites', 'retweets'])
-    tweets_df['date'] = tweets_df['created_at'].apply(get_date)
+    tweets_df['date'] = pd.to_datetime(tweets_df['created_at'].apply(get_date))
 
 
     return tweets_df
